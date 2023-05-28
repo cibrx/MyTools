@@ -97,7 +97,7 @@ class MyTools(object):
 	def NetworkSniffer(self):
 		result = MyTools.getInterfaceName(self)
 		os.system("clear")
-		print("Passive Network Scanner Open\nMac Address"+38*(" ")+"Ip Address"+59*"*")
+		print("Passive Network Scanner Open\nMac Address"+38*(" ")+"Ip Address\n"+59*"*")
 
 		while True:
 			s = scapy.AsyncSniffer(iface = result, filter = 'arp', count = 5)
