@@ -3,10 +3,8 @@ import sys
 import socket
 from datetime import datetime
 import os
-from cryptography.fernet import Fernet
 import scapy.all as scapy
-import psutil
-
+import getIface
 
 class MyTools(object):
 
@@ -77,35 +75,22 @@ class MyTools(object):
 				print("\ [*]Server not responding !!!!")
 				sys.exit()
 
-
-	
-	def getInterfaceName(self):
-		
-		addrs = psutil.net_if_addrs()
-		print("[*]Interface Names:")
-		temp=1
-		for inter in addrs:
-			print(str(temp)+". :==: "+str(inter))
-			temp+=1
-		temp=1
-		iface = int(input("Please Choose A Interface Number :==: ")	)
-		for inter in addrs:
-			if temp == iface:
-				return inter
-			
 		
 	def NetworkSniffer(self):
-		result = MyTools.getInterfaceName(self)
+		result = getIface.GetIface.getInterfaceName(self)
 		os.system("clear")
 		print("Passive Network Scanner Open\nMac Address"+38*(" ")+"Ip Address\n"+59*"*")
+		ipaddress = []
 
 		while True:
 			s = scapy.AsyncSniffer(iface = result, filter = 'arp', count = 5)
 			s.start()
 			s.join()
 			pkts = s.results
+
 			for p in pkts:
-				if p.op == 2:
+				if p.op == 2 and not str(p.pdst) in ipaddress:
+					ipaddress.append(str(p.pdst))
 					print(p.hwdst+38*(" ")+p.pdst)
-		
+	
 		
