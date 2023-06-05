@@ -2,37 +2,27 @@ from main import MyTools
 
 class Execute(MyTools):
     def Run(self):
-        mytools=MyTools()
+        mytools = MyTools()
         while True:
             try:
                 print("*" * 50)
+                # Display the menu
                 print(mytools.menu)
                 print("*" * 50)
-                select=int(input("[?]Please,Select a Function :==: "))
+                select = int(input("[?] Please, select a function:==: "))
                 
-                if select == 1:MyTools.PortScanner()
-                elif select== 2:MyTools.NetworkSniffer(self)
-                elif select == 0:print("bye");break
+                if select == 1:
+                    # Call the PortScanner method from MyTools class
+                    MyTools.PortScanner(self)
+                elif select == 2:
+                    # Call the NetworkSniffer method from MyTools class
+                    MyTools.NetworkSniffer(self)
+                elif select == 0:
+                    print("Bye")
+                    break
             except KeyboardInterrupt:
-                print("If you want to exit,press (0)...")
+                print("If you want to exit, press (0)...")
                 continue
         
-e=Execute()
+e = Execute()
 e.Run()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
