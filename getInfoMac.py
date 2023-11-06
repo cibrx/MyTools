@@ -1,9 +1,7 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import time
 import sys
-from selenium.common.exceptions import NoSuchElementException
-
+import random
+import requests
+from datetime import datetime
 
 def help():
     print("""
@@ -12,40 +10,25 @@ def help():
 
 
 def get():
-    # Create a webdriver instance
-    #firefox_options = Options()
-    #firefox_options.add_argument('--headless')
-    browser = webdriver.Firefox()
-    #mac_input = browser.find_element_by_id('ml_mac_add')
-
-
     # Open the MAC addresses file
     macs = open(sys.argv[1], "r")
     lines = macs.readlines()
-    for line in lines:
-        try:
-            # Visit the MAC lookup website
-            browser.get("https://dnschecker.org/mac-lookup.php?query={}".format(line))
-            
-            # Find and click the submit button
-            submit_button = browser.find_element_by_id('ml_submit')
-            submit_button.click()
-            
-            time.sleep(3)
-            
-            # Find the element containing the corporation information
-            temp = browser.find_element_by_xpath("/html/body/div[4]/div/div/div[1]/div[3]/table/tbody/tr[2]/td[2]")
-            
-            # Print the MAC address and corporation information
-            print("\n", line, "Corporation: ", temp.text)
-        
-        except NoSuchElementException as e:
-            # Handle the case when the information is not found
-            print("[!] {} Information Not Found:".format(line))
-    
-    # Quit the browser
-    browser.quit()
 
+    # get csrf token
+    csrf = requests.get('https://dnschecker.org/ajax_files/gen_csrf.php?upd=' + str(random.random() * 1000 + datetime.now().microsecond // 1000), headers={'Referer': 'https://dnschecker.org/mac-lookup.php?query=00000000000'})
+
+    for line in lines:
+        # send query with csrf token
+        data = requests.post('https://dnschecker.org/ajax_files/mac_lookup.php', headers={'Content-Type': 'application/x-www-form-urlencoded', "csrftoken": csrf.json().get('csrf'), 'Referer': 'https://dnschecker.org/mac-lookup.php?query=000000000000'}, data={'mac_add': line.strip()})
+
+        # if there is something in errors array print it out, if not print the result and mac address
+        if data.text == "Invalid CSRF.":
+            print("[!] Invalid CSRF Token")
+        elif data.json().get('errors'):
+            print(data.text)
+            print("[!] Information Not Found:", line.strip())
+        else:
+            print(line.strip(), "Corporation:", data.json().get('result')[0].get('name'))
 
 # Call the get function
 get()
