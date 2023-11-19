@@ -1,13 +1,21 @@
 # MyTools
-{*} MyTools is a project that contains many tools.The MyTools project is a combination of both Passive Network Listener and Open Port Scanner
 
-# Requirements
-{*} You can install requirements with "pip install psutil scapy" command.
+# Network Toolkit
 
-# How to use?
-{*} very simple to use with menu system.You just run execute.py file with "python execute.py" command.
+This is a versatile network toolkit that provides the following functionalities:
 
-# Updates
-That project will update at certain intervals.
-                
-See You Later At Different Projects :=}
+- Passive Network Listener: Monitors network traffic passively.
+- Open Port Scanner: Scans open ports on a specified target.
+- MAC Brand Info: Retrieves information about the MAC address, such as the manufacturer or vendor.
+
+## Prerequisites
+
+- Python 3.x installed on your system.
+
+## Usage
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/network-toolkit.git
+   cd network-toolkit
