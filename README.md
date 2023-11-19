@@ -23,8 +23,5 @@ This is a versatile network toolkit that provides the following functionalities:
 
    ```bash
    python main.py
-
-### For Mac Brand Info
-
-   ```bash
+   # also for Mac Brand Info
    python3 getInfoMac.py <your_mac_file.txt>
