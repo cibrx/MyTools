@@ -19,3 +19,12 @@ This is a versatile network toolkit that provides the following functionalities:
    ```bash
    git clone https://github.com/your-username/network-toolkit.git
    cd network-toolkit
+### For Listener and Port Scanner
+
+   ```bash
+   python main.py
+
+### For Mac Brand Info
+
+   ```bash
+   python3 getInfoMac.py <your_mac_file.txt>
