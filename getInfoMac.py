@@ -5,7 +5,7 @@ from datetime import datetime
 
 def help():
     print("""
-    Usage: python3 getInfoMac.py <your macs file(.txt)>
+    Usage: python3 getInfoMac.py <your mac file(.txt)>
     """)
 
 
