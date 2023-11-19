@@ -17,11 +17,8 @@ This is a versatile network toolkit that provides the following functionalities:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/network-toolkit.git
-   cd network-toolkit
-### For Listener and Port Scanner
-
-   ```bash
+   git clone https://github.com/LegendMan46/MyTools.git
+   cd MyTools
    python main.py
 
    # also for Mac Brand Info
