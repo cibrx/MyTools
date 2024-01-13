@@ -8,7 +8,7 @@ This is a versatile network toolkit that provides the following functionalities:
 - Open Port Scanner: Scans open ports on a specified target.
 - MAC Brand Info: Retrieves information about the MAC address, such as the manufacturer or vendor.
 
-## Prerequisites
+## Requirements
 
 - Python 3.x installed on your system.
 
